@@ -1,5 +1,67 @@
+import { API, graphqlOperation } from "aws-amplify";
+import { listOrders } from "../../graphql/queries";
+import { useEffect, useState } from "react";
+import type { ColumnsType } from "antd/es/table";
+import type { Order } from "../../API";
+import { Table } from "antd";
+
 const OrdersTable = () => {
-  return <>Table Here</>;
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const res = await API.graphql(graphqlOperation(listOrders));
+        setData(res);
+      } catch (err) {
+        console.log("Error: ", err.errors[0].message);
+      }
+    };
+
+    if (!data) getOrders();
+  }, []);
+
+  const columns: ColumnsType<Order> = [
+    {
+      title: "Team Member",
+      dataIndex: "teamMember",
+      key: "teamMember",
+    },
+    {
+      title: "Priority",
+      dataIndex: "priority",
+      key: "priority",
+    },
+    {
+      title: "Order Number",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Team",
+      dataIndex: "team",
+      key: "team",
+    },
+    {
+      title: "Due Date",
+      dataIndex: "dueDate",
+      key: "dueDate",
+    },
+  ];
+
+  if (!data) return <>Loading...</>;
+
+  return (
+    <>
+      {data.data.listOrders.items && (
+        <Table
+          rowKey={(record) => record.id}
+          columns={columns}
+          dataSource={data.data.listOrders.items}
+        />
+      )}
+    </>
+  );
 };
 
 export default OrdersTable;

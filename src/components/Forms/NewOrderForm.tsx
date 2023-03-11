@@ -1,12 +1,13 @@
 import { Form, Input, Select, DatePicker } from "antd";
 import { API, graphqlOperation } from "aws-amplify";
-import { useEffect } from "react";
 import { createOrder } from "../../graphql/mutations";
 
 interface Props {
   onSubmit: Function;
 }
 export const NewOrderForm = ({ onSubmit }: Props) => {
+  const [form] = Form.useForm();
+
   const onPass = async (values: { [key: string]: any }) => {
     try {
       onSubmit(false);
@@ -20,6 +21,7 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
           },
         })
       );
+      form.resetFields();
       onSubmit(true);
     } catch (err) {
       console.log("Error: ", err.errors[0].message);
