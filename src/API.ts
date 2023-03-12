@@ -8,7 +8,6 @@ export type CreateOrderInput = {
   team: Team,
   dueDate: string,
   id?: string | null,
-  _version?: number | null,
 };
 
 export enum Priority {
@@ -95,9 +94,6 @@ export type Order = {
   id: string,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateOrderInput = {
@@ -106,12 +102,10 @@ export type UpdateOrderInput = {
   team?: Team | null,
   dueDate?: string | null,
   id: string,
-  _version?: number | null,
 };
 
 export type DeleteOrderInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelOrderFilterInput = {
@@ -128,7 +122,6 @@ export type ModelOrderConnection = {
   __typename: "ModelOrderConnection",
   items:  Array<Order | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelSubscriptionOrderFilterInput = {
@@ -170,9 +163,6 @@ export type CreateOrderMutation = {
     id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -191,9 +181,6 @@ export type UpdateOrderMutation = {
     id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -212,9 +199,6 @@ export type DeleteOrderMutation = {
     id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -232,9 +216,6 @@ export type GetOrderQuery = {
     id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -256,40 +237,8 @@ export type ListOrdersQuery = {
       id: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncOrdersQueryVariables = {
-  filter?: ModelOrderFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncOrdersQuery = {
-  syncOrders?:  {
-    __typename: "ModelOrderConnection",
-    items:  Array< {
-      __typename: "Order",
-      teamMember: string,
-      priority: Priority,
-      team: Team,
-      dueDate: string,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -307,9 +256,6 @@ export type OnCreateOrderSubscription = {
     id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -327,9 +273,6 @@ export type OnUpdateOrderSubscription = {
     id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -347,8 +290,5 @@ export type OnDeleteOrderSubscription = {
     id: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };

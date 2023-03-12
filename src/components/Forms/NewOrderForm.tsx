@@ -23,8 +23,8 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
       );
       form.resetFields();
       onSubmit(true);
-    } catch (err) {
-      console.log("Error: ", err.errors[0].message);
+    } catch (err: unknown) {
+      console.log("Error: ", err);
     }
   };
 

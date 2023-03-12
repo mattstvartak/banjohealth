@@ -1,19 +1,25 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-banjohealth-dev-101818-authRole",
-      "UnauthRoleArn": "arn:aws:iam::149106359114:role/amplify-banjohealth-dev-101818-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::149106359114:role/amplify-banjohealth-dev-101818-authRole",
+      "AuthRoleName": "amplify-banjohealth-dev-104816-authRole",
+      "UnauthRoleArn": "arn:aws:iam::149106359114:role/amplify-banjohealth-dev-104816-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::149106359114:role/amplify-banjohealth-dev-104816-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-banjohealth-dev-101818-deployment",
-      "UnauthRoleName": "amplify-banjohealth-dev-101818-unauthRole",
-      "StackName": "amplify-banjohealth-dev-101818",
-      "StackId": "arn:aws:cloudformation:us-east-1:149106359114:stack/amplify-banjohealth-dev-101818/f537fe00-c01f-11ed-8ac8-0e69d94cc701",
-      "AmplifyAppId": "d3kk35koewp05f"
+      "DeploymentBucketName": "amplify-banjohealth-dev-104816-deployment",
+      "UnauthRoleName": "amplify-banjohealth-dev-104816-unauthRole",
+      "StackName": "amplify-banjohealth-dev-104816",
+      "StackId": "arn:aws:cloudformation:us-east-1:149106359114:stack/amplify-banjohealth-dev-104816/ed0779c0-c0e4-11ed-977a-12bebd4450e9",
+      "AmplifyAppId": "d2rsloubxu64n6"
     },
     "categories": {
       "api": {
         "banjohealth": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2rsloubxu64n6",
+          "type": "manual"
+        }
       }
     }
   }

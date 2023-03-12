@@ -1,6 +1,6 @@
 projects:
   banjohealth:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/banjohealth/build/schema.graphql
     includes:
       - src/graphql/**/*.ts
     excludes:

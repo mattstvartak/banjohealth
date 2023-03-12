@@ -13,8 +13,8 @@ const OrdersTable = () => {
       try {
         const res = await API.graphql(graphqlOperation(listOrders));
         setData(res);
-      } catch (err) {
-        console.log("Error: ", err.errors[0].message);
+      } catch (err: unknown) {
+        console.log("Error: ", err);
       }
     };
 

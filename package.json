@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/antd": "^1.0.0",
     "@types/styled-components": "^5.1.26",
     "antd": "^5.3.0",
     "aws-amplify": "^5.0.18",
