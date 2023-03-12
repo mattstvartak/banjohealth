@@ -9,8 +9,12 @@ interface Props {
 export const NewOrderForm = ({ onSubmit }: Props) => {
   const [form] = Form.useForm();
 
+  const formatDate = (date: string) => {
+    return new Date(date).toISOString().split('T')[0] + "Z";
+  }
+
   const onPass = async (values: { [key: string]: any }) => {
-    const date = new Date(values.dueDate["$d"]).toISOString().split('T')[0] + "Z";
+    const date = formatDate(values.dueDate["$d"]);
 
     try {
       onSubmit(false);
