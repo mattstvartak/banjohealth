@@ -11,12 +11,6 @@ const Wrapper = styled.div`
 const Orders = () => {
   return (
     <Wrapper>
-      <Row justify='space-evenly'>
-        <Col span='12'>Orders</Col>
-        <Col span='12'>
-          <OrderModal />
-        </Col>
-      </Row>
       <Row>
         <Col span='24'>
           <OrdersTable />

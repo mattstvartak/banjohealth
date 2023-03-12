@@ -15,12 +15,12 @@ export const OrderModal = () => {
   const handleOk = (done: boolean) => {
     if (!done) setConfirmLoading(true);
     if (done) {
+      setConfirmLoading(false)
       setOpen(false);
     }
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
     setOpen(false);
   };
 
@@ -38,6 +38,8 @@ export const OrderModal = () => {
         open={open}
         okButtonProps={{ htmlType: "submit", form: "new-order-form" }}
         okText='Submit'
+        forceRender
+        destroyOnClose={false}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >

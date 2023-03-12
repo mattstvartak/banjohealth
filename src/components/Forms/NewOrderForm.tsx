@@ -1,6 +1,7 @@
 import { Form, Input, Select, DatePicker } from "antd";
 import { API, graphqlOperation } from "aws-amplify";
 import { createOrder } from "../../graphql/mutations";
+import { Priority, Team } from "../../API";
 
 interface Props {
   onSubmit: Function;
@@ -9,6 +10,8 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
   const [form] = Form.useForm();
 
   const onPass = async (values: { [key: string]: any }) => {
+    const date = new Date(values.dueDate["$d"]).toISOString().split('T')[0] + "Z";
+
     try {
       onSubmit(false);
       await API.graphql(
@@ -17,7 +20,7 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
             teamMember: values.teamMember,
             priority: values.priority,
             team: values.team,
-            dueDate: values.dueDate["$d"],
+            dueDate: date,
           },
         })
       );
@@ -37,6 +40,7 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
       name='New Order Form'
       wrapperCol={{ span: 24 }}
       onFinish={(values) => onPass(values)}
+      form={form}
     >
       <Form.Item
         label='Team Member Name'
@@ -54,9 +58,9 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
       >
         <Select
           options={[
-            { value: "HIGH", label: "High" },
-            { value: "MEDIUM", label: "Medium" },
-            { value: "LOW", label: "Low" },
+            { value: Priority.HIGH , label: "High" },
+            { value: Priority.MEDIUM, label: "Medium" },
+            { value: Priority.LOW, label: "Low" },
           ]}
         />
       </Form.Item>
@@ -67,10 +71,10 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
       >
         <Select
           options={[
-            { value: "RED", label: "Red" },
-            { value: "GREEN", label: "Green" },
-            { value: "BLUE", label: "Blue" },
-            { value: "YELLOW", label: "Yellow" },
+            { value: Team.RED, label: "Red" },
+            { value: Team.GREEN, label: "Green" },
+            { value: Team.BLUE, label: "Blue" },
+            { value: Team.YELLOW, label: "Yellow" },
           ]}
         />
       </Form.Item>

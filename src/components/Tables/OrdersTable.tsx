@@ -3,7 +3,8 @@ import { listOrders } from "../../graphql/queries";
 import { useEffect, useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import type { Order } from "../../API";
-import { Table } from "antd";
+import { Col, Row, Table } from "antd";
+import { OrderModal } from "../Modals";
 
 const OrdersTable = () => {
   const [data, setData] = useState<any>(null);
@@ -57,6 +58,14 @@ const OrdersTable = () => {
         <Table
           rowKey={(record) => record.id}
           columns={columns}
+          title={() => (
+            <Row justify='space-evenly'>
+              <Col span='12'>Orders</Col>
+              <Col span='12'>
+                <OrderModal />
+              </Col>
+            </Row>
+          )}
           dataSource={data.data.listOrders.items}
         />
       )}
