@@ -69,7 +69,7 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
           options={[
             { value: "RED", label: "Red" },
             { value: "GREEN", label: "Green" },
-            { value: "Blue", label: "Blue" },
+            { value: "BLUE", label: "Blue" },
             { value: "YELLOW", label: "Yellow" },
           ]}
         />
