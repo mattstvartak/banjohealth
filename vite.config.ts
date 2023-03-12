@@ -19,4 +19,5 @@ export default defineConfig({
     }),
     react(),
   ],
+  define: {global: "window",}
 })
