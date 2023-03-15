@@ -6,13 +6,23 @@ import { Priority, Team } from "../../API";
 interface Props {
   onSubmit: Function;
 }
+
 export const NewOrderForm = ({ onSubmit }: Props) => {
   const [form] = Form.useForm();
 
+  /**
+   * Formats the date appropriately for AWSDate
+   * @param date string
+   * @returns string
+   */
   const formatDate = (date: string) => {
     return new Date(date).toISOString().split('T')[0] + "Z";
   }
 
+  /**
+   * Sends order values to AWS if validation passes.
+   * @param values object
+   */
   const onPass = async (values: { [key: string]: any }) => {
     const date = formatDate(values.dueDate["$d"]);
 

@@ -10,6 +10,9 @@ const OrdersTable = () => {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
+    /**
+     * Retrieves orders from the API.
+     */
     const getOrders = async () => {
       try {
         const res = await API.graphql(graphqlOperation(listOrders));

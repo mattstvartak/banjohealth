@@ -8,10 +8,17 @@ export const OrderModal = () => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
+    /**
+     * Updates modal state.
+     */
   const showModal = () => {
     setOpen(true);
   };
 
+  /**
+   * Closes modal and disables loading state.
+   * @param done boolean
+   */
   const handleOk = (done: boolean) => {
     if (!done) setConfirmLoading(true);
     if (done) {
@@ -20,6 +27,9 @@ export const OrderModal = () => {
     }
   };
 
+  /**
+   * Updates modal state on cancel.
+   */
   const handleCancel = () => {
     setOpen(false);
   };
