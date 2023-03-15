@@ -6,6 +6,7 @@ import type { Order } from "../../API";
 import { Col, Row, Table } from "antd";
 import { OrderModal } from "../Modals";
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 const StyledTable = styled(Table)`
     .ant-table {
@@ -27,10 +28,16 @@ const StyledTable = styled(Table)`
     }
 
     .ant-table-pagination.ant-table-pagination {
+      display: block;
       background-color: #fff;
       margin: 0;
-      padding: 16px 0;
+      padding: 16px 24px;
       border-radius: 0 0 16px 16px;
+      text-align: right;
+    }
+
+    .ant-pagination-total-text {
+      float: left;
     }
 
     td, th {
@@ -142,6 +149,9 @@ const OrdersTable = () => {
       title: "Due Date",
       dataIndex: "dueDate",
       key: "dueDate",
+      render: (text: string) => (
+        <>{dayjs(text).format('MM/DD/YYYY')}</>
+      )
     },
   ];
 
@@ -162,6 +172,11 @@ const OrdersTable = () => {
             </Row>
           )}
           dataSource={data.data.listOrders.items}
+          pagination={{
+            defaultPageSize: 10,
+            hideOnSinglePage: true,
+            showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results found`
+          }}
         />
       )}
     </>

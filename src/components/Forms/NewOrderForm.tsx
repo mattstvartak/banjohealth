@@ -1,4 +1,4 @@
-import { Form, Input, Select, DatePicker } from "antd";
+import { Form, Input, Select, DatePicker, DatePickerProps } from "antd";
 import { API, graphqlOperation } from "aws-amplify";
 import { createOrder } from "../../graphql/mutations";
 import { Priority, Team } from "../../API";
@@ -44,6 +44,9 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
       console.log("Error: ", err);
     }
   };
+
+  const customFormat: DatePickerProps['format'] = (value) =>
+  `${value.format('MM/DD/YYYY')}`;
 
   return (
     <Form
@@ -96,8 +99,9 @@ export const NewOrderForm = ({ onSubmit }: Props) => {
         label='Due Date'
         name='dueDate'
         rules={[{ required: true, message: "Please select a due date." }]}
+        extra="Date format must be mm/dd/yyyy"
       >
-        <DatePicker style={{ width: "100%" }} />
+        <DatePicker format={customFormat} style={{ width: "100%" }} />
       </Form.Item>
     </Form>
   );
