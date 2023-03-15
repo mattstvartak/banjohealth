@@ -31,7 +31,7 @@ export const OrderModal = () => {
         type='primary'
         onClick={() => showModal()}
       >
-        Add Order
+        New Order
       </Button>
       <Modal
         title='Create New Order'
