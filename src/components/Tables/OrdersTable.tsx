@@ -1,12 +1,13 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { listOrders } from "../../graphql/queries";
 import { useEffect, useState } from "react";
-import type { ColumnsType } from "antd/es/table";
-import type { Order } from "../../API";
+import * as subscriptions from '../../graphql/subscriptions';
+import { GraphQLSubscription, GraphQLQuery } from '@aws-amplify/api';
 import { Col, Row, Table } from "antd";
 import { OrderModal } from "../Modals";
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import { ListOrdersQuery, OnCreateOrderSubscription } from "../../API";
 
 const StyledTable = styled(Table)`
     .ant-table {
@@ -93,12 +94,11 @@ const OrdersTable = () => {
      * Retrieves orders from the API.
      */
     const getOrders = async () => {
-      try {
-        const res = await API.graphql(graphqlOperation(listOrders));
-        setData(res);
-      } catch (err: unknown) {
-        console.log("Error: ", err);
-      }
+      await API.graphql<GraphQLQuery<ListOrdersQuery>>(graphqlOperation(listOrders))
+      .then((data: { [key: string]: any } | null) => {
+        if ( data ) setData(data.data.listOrders.items)
+      })
+      .catch(err => console.warn(err));
     };
 
     if (!data) getOrders();
@@ -121,7 +121,7 @@ const OrdersTable = () => {
     }
   }
 
-  const columns: ColumnsType<Order> = [
+  const columns = [
     {
       title: "Team Member",
       dataIndex: "teamMember",
@@ -157,9 +157,16 @@ const OrdersTable = () => {
 
   if (!data) return <>Loading...</>;
 
+  API.graphql<GraphQLSubscription<OnCreateOrderSubscription>>(
+    graphqlOperation(subscriptions.onCreateOrder)
+  ).subscribe({
+    next: ({ value }) => setData([...data, value.data?.onCreateOrder]),
+    error: (error) => console.warn(error)
+  });
+
   return (
     <>
-      {data.data.listOrders.items && (
+      {data && (
         <StyledTable
           rowKey={(record: {[key: string]: any}) => record.id}
           columns={columns}
@@ -171,7 +178,7 @@ const OrdersTable = () => {
               </Col>
             </Row>
           )}
-          dataSource={data.data.listOrders.items}
+          dataSource={[...data]}
           pagination={{
             defaultPageSize: 10,
             hideOnSinglePage: true,
