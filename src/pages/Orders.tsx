@@ -4,7 +4,7 @@ import { OrderModal } from "../components/Modals";
 import { OrdersTable } from "../components/Tables";
 const Wrapper = styled.div`
   margin: 0 auto;
-  width: 800px;
+  max-width: 1100px;
   padding: 20px;
 `;
 
